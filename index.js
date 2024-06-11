@@ -12,6 +12,31 @@ app.get("/random", (req, res) => {
     res.json(jokes[randomIndex]);
 });
 
+app.get("/jokes/id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const foundJoke = jokes.find((joke) => joke.id === id);
+  res.json(foundJoke);
+});
+
+app.get("/filter", (req, res) => {
+  const type = req.query.type;
+  const filteredActivities = jokes.filter((joke) => joke.jokeType === type );
+  res.json(filteredActivities);
+});
+
+app.post("/jokes", (req, res) => {
+  const newJoke = {
+    id: jokes.length + 1,
+    jokeText: req.body.text,
+    jokeType: req.body.type,
+  };
+  jokes.push(newJoke);
+  console.log(jokes.slice(-1));
+  res.json(newJoke);
+});
+
+
+
 app.listen(port, () => {
     console.log(`Successfully started server on port ${port}`);
 });
