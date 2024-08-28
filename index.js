@@ -1,12 +1,12 @@
 import express from "express";
 import bodyParser from "body-parser";
-import dotenv from "dotenv";
-dotenv.config();
+import env from "dotenv";
 
 const app = express();
 const port = 3000;
 const masterKey = process.env.MASTER_KEY;
-console.log(`http://localhost:${masterKey}`);
+env.config();
+
 
 app.use(bodyParser.urlencoded({ extended : true }));
 
